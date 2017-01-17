@@ -1,2 +1,2 @@
-This python script copies the sewer feature dataset and some basemap layers to the CCTV.gdb and BASEMAP.gdb on the Common drive.
-Sewer_TransDBtoCCTVDB is the most updated script.
+#Sewer CCTV Request
+Use CCTV_sync as most updated script to synchronize CCTV request changes to CCTV.gdb from transactional database.
