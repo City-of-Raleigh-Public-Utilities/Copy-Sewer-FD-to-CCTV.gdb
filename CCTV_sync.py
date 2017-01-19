@@ -1,15 +1,16 @@
-## This script is for updating CCTV request. Changes will be synced to CCTV.gdb on shared drive. 
+## This script is for updating CCTV request. Changes will be synced from transactional to CCTV.gdb on shared drive. 
 import arcpy
 from arcpy import env
+
 
 env.overwriteOutput = True
 # env.workspace = "Database Connections/RPUD_TRANSDB.sde"
 env.workspace = "C:/data"
 
 ## set up variables
-replica_gdb1 = "Database Connections/RPUD_TRANSDB.sde"
-replica_gdb2 = "//corfile/common/Public Utilities/CCTV/CCTV.gdb"
-replica_name = "RPUD.CCTV_gistprd_to_cctv_fgdb"  
+replica_gdb1 = "Database Connections/RPUD_TRANSDB.sde" #parent 
+replica_gdb2 = "//corfile/common/Public Utilities/CCTV/CCTV.gdb" #child
+replica_name = "RPUD.CCTV_gistprd_to_cctv_fgdb"  #Replica pre-defined and registered on RPUD
 sync_direction = "FROM_GEODATABASE1_TO_2"
 
 ## compare replica schema
@@ -24,6 +25,7 @@ arcpy.ImportReplicaSchema_management(replica_gdb2, schemaChangeXML)
 ## synchronize change
 print ("Updating CCTV data from {0} to {1}...".format(replica_gdb1, replica_gdb2))
 arcpy.AddMessage("Updating CCTV data from {0} to {1}...".format(replica_gdb1, replica_gdb2))
+
 ## sync changes
 arcpy.SynchronizeChanges_management(replica_gdb1, replica_name, replica_gdb2, sync_direction)
 print ("Sync complete.")
