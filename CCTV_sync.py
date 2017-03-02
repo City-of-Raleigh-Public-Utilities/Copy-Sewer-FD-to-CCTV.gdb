@@ -20,10 +20,10 @@ sync_direction = "FROM_GEODATABASE1_TO_2"
 ## compare replica schema
 print("Comparing replica schema...")
 arcpy.AddMessage("Comparing replica schema...")
-outputXML = "C:/data/replicaSchema.xml"
+outputXML = "C:/ReplicaSchema/replicaSchema.xml"
 # overwriteXML(outputXML)
 arcpy.ExportReplicaSchema_management(replica_gdb1, outputXML, replica_name)
-schemaChangeXML = "C:/data/schemaChange.xml"
+schemaChangeXML = "C:/ReplicaSchema/schemaChange.xml"
 # overwriteXML(schemaChangeXML)
 arcpy.CompareReplicaSchema_management(replica_gdb2, outputXML, schemaChangeXML)
 arcpy.ImportReplicaSchema_management(replica_gdb2, schemaChangeXML)
